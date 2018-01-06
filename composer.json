@@ -15,12 +15,16 @@
     "autoload": {
         "psr-4": {
             "Fefas\\AssertPsrResponse\\": "src/"
-        }
+        },
+        "files": [
+            "vendor/phpunit/phpunit/src/Framework/Assert/Functions.php"
+        ]
     },
 
     "minimum-stability": "stable",
 
     "require": {
-        "phpunit/phpunit": "^6.5"
+        "phpunit/phpunit": "^6.5",
+        "psr/http-message": "^1.0"
     }
 }
