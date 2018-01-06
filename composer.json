@@ -16,5 +16,11 @@
         "psr-4": {
             "Fefas\\AssertPsrResponse\\": "src/"
         }
+    },
+
+    "minimum-stability": "stable",
+
+    "require": {
+        "phpunit/phpunit": "^6.5"
     }
 }
