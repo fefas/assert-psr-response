@@ -63,4 +63,4 @@ Available assertions so far:
 
 * Status Code
 * Header Line
-* [WIP] JSON Body Content
+* JSON Body Content

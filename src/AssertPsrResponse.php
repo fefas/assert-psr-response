@@ -42,14 +42,41 @@ class AssertPsrResponse
         }
     }
 
+    public function jsonBodyContentToAssert(string $expected): void
+    {
+        $current = $this->responseToAssert->getBody()->getContents();
+
+        try {
+            assertJsonStringEqualsJsonString($expected, $current);
+        } catch (\Exception $phpunitException) {
+            $jsonDiff = $phpunitException->getComparisonFailure()->getDiff();
+
+            $this->appendAssertFailingMessage(
+                'json body content',
+                $expected,
+                $current,
+                $jsonDiff
+            );
+        }
+    }
+
     private function appendAssertFailingMessage(
         string $context,
         string $expected,
-        string $current
+        string $current,
+        string $diff = null
     ): void {
-        $this->failedAssertingMessages[] = <<<MSG
+
+        $newMessage = <<<MSG
 Failed asserting response $context '$current' to the expected '$expected'
 MSG;
+
+        if (null !== $diff) {
+            $diff = trim($diff, "\n");
+            $newMessage .= "\n$diff";
+        }
+
+        $this->failedAssertingMessages[] = $newMessage;
     }
 
     private function hasAssertFailingMessages(): bool
