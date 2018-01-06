@@ -1,0 +1,20 @@
+{
+    "name": "fefas/assert-psr-response",
+    "description": "PHP package with class to assert PSR responses",
+
+    "type": "library",
+    "license": "MIT",
+
+    "authors": [
+        {
+            "name": "Felipe Martins",
+            "email": "me@fefas.net"
+        }
+    ],
+
+    "autoload": {
+        "psr-4": {
+            "Fefas\\AssertPsrResponse\\": "src/"
+        }
+    }
+}
