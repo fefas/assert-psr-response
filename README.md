@@ -99,7 +99,7 @@ case. See the samples bellow:
    // Failed asserting response header line 'Content-Type' 'application/json' to the expected 'text/html'
    ```
 
-4. Assert Status Code and Header Line that none match the expected
+4. Assert Status Code and Header Line that don't match the expected
 
    ```php
    <?php
@@ -120,3 +120,15 @@ case. See the samples bellow:
    // Failed asserting response status code '500' to the expected '200'
    // Failed asserting response header line 'Content-Type' 'text/html' to the expected 'application/json'
    ```
+
+## Contribution
+
+There is two ways to contribute with this project. The first one is by opening
+an issue [here](https://github.com/fefas/assert-psr-response/issues). The second
+one is by coding:
+
+1. Fork this project and clone it on your local dev environment
+2. Install dependencies throught the command: `composer install`
+3. Run the locally tests before ubmiting a pull request:
+  * To test code standards: `composer run test:cs`
+  * To run unit tests: `composer run test:unit`
