@@ -12,7 +12,7 @@ class HeaderLineAssertionTest extends TestCase
     /**
      * @test
      */
-    public function isNotFailedIfResponseHasHeaderLineEqualsTheExpected(): void
+    public function isNotFailedIfResponseHeaderLineEqualsTheExpected(): void
     {
         $responseToAssert = $this->responseWithHeaderLine('Content-Type', 'text/html');
         $headerLineAssertion = new HeaderLineAssertion(
@@ -29,7 +29,7 @@ class HeaderLineAssertionTest extends TestCase
     /**
      * @test
      */
-    public function returnNullFailedMessageIfResponseHasHeaderLineEqualsTheExpected(): void
+    public function returnNullFailedMessageIfResponseHeaderLineEqualsTheExpected(): void
     {
         $responseToAssert = $this->responseWithHeaderLine('Content-Type', 'text/html');
         $headerLineAssertion = new HeaderLineAssertion(
@@ -46,7 +46,7 @@ class HeaderLineAssertionTest extends TestCase
     /**
      * @test
      */
-    public function isFailedIfResponseHasHeaderLineNotEqualsTheExpected(): void
+    public function isFailedIfResponseHeaderLineNotEqualsTheExpected(): void
     {
         $responseToAssert = $this->responseWithHeaderLine('Content-Type', 'text/html');
         $headerLineAssertion = new HeaderLineAssertion(
@@ -63,7 +63,7 @@ class HeaderLineAssertionTest extends TestCase
     /**
      * @test
      */
-    public function returnFailedMessageIfResponseHasHeaderLineNotEqualsTheExpected(): void
+    public function returnFailedMessageIfResponseHeaderLineNotEqualsTheExpected(): void
     {
         $responseToAssert = $this->responseWithHeaderLine('Content-Type', 'text/html');
         $headerLineAssertion = new HeaderLineAssertion(
