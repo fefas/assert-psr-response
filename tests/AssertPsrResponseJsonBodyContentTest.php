@@ -35,7 +35,7 @@ class AssertPsrResponseJsonBodyContentTest extends TestCase
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(
-            "Failed asserting response json body content '[1,3]' to the expected '[1,2]'"
+            "Failed asserting response json body '[1,3]' to the expected '[1,2]'"
         );
 
         $assertPsrResponse->assert();

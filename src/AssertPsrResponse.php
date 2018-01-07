@@ -3,89 +3,73 @@
 namespace Fefas\AssertPsrResponse;
 
 use RuntimeException;
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ResponseInterface as Response;
+use Fefas\AssertPsrResponse\Assertions\Assertion;
+use Fefas\AssertPsrResponse\Assertions\HeaderLineAssertion;
+use Fefas\AssertPsrResponse\Assertions\JsonBodyAssertion;
+use Fefas\AssertPsrResponse\Assertions\StatusCodeAssertion;
 
 class AssertPsrResponse
 {
     private $responseToAssert;
-    private $failedAssertingMessages = [];
+    private $assertions = [];
 
-    public function __construct(ResponseInterface $responseToAssert)
+    public function __construct(Response $responseToAssert)
     {
         $this->responseToAssert = $responseToAssert;
     }
 
     public function assert(): bool
     {
-        if (false === $this->hasAssertFailingMessages()) {
+        $failedMessage = [];
+        foreach ($this->assertions as $assertion) {
+            if ($assertion->isFailed()) {
+                $failedMessage[] = $assertion->failedMessage();
+            }
+        }
+
+        if (empty($failedMessage)) {
             return true;
         }
 
-        throw new RuntimeException($this->assertFailingMessage());
+        throw new RuntimeException(implode("\n", $failedMessage));
     }
 
-    public function addStatusCodeToAssert(int $expected): void
+    public function addStatusCodeToAssert(int $expectedStatusCode): void
     {
-        $current = $this->responseToAssert->getStatusCode();
+        $statusCodeAssertion = new StatusCodeAssertion(
+            $expectedStatusCode,
+            $this->responseToAssert
+        );
 
-        if ($expected != $current) {
-            $this->appendAssertFailingMessage('status code', $expected, $current);
-        }
+        $this->addAssertion($statusCodeAssertion);
     }
 
-    public function addHeaderLineToAssert(string $name, string $expected): void
-    {
-        $current = $this->responseToAssert->getHeaderLine($name);
-
-        if ($expected !== $current) {
-            $this->appendAssertFailingMessage("header line '$name'", $expected, $current);
-        }
-    }
-
-    public function addJsonBodyContentToAssert(string $expected): void
-    {
-        $current = $this->responseToAssert->getBody()->getContents();
-
-        try {
-            assertJsonStringEqualsJsonString($expected, $current);
-        } catch (\Exception $phpunitException) {
-            $jsonDiff = $phpunitException->getComparisonFailure()->getDiff();
-
-            $this->appendAssertFailingMessage(
-                'json body content',
-                $expected,
-                $current,
-                $jsonDiff
-            );
-        }
-    }
-
-    private function appendAssertFailingMessage(
-        string $context,
-        string $expected,
-        string $current,
-        string $diff = null
+    public function addHeaderLineToAssert(
+        string $headerName,
+        string $expectedHeaderLine
     ): void {
+        $headerLineAssertion = new HeaderLineAssertion(
+            $expectedHeaderLine,
+            $headerName,
+            $this->responseToAssert
+        );
 
-        $newMessage = <<<MSG
-Failed asserting response $context '$current' to the expected '$expected'
-MSG;
-
-        if (null !== $diff) {
-            $diff = trim($diff, "\n");
-            $newMessage .= "\n$diff";
-        }
-
-        $this->failedAssertingMessages[] = $newMessage;
+        $this->addAssertion($headerLineAssertion);
     }
 
-    private function hasAssertFailingMessages(): bool
+    public function addJsonBodyContentToAssert(string $expectedJsonBody): void
     {
-        return count($this->failedAssertingMessages) > 0;
+        $jsonBodyAssertion = new JsonBodyAssertion(
+            $expectedJsonBody,
+            $this->responseToAssert
+        );
+
+        $this->addAssertion($jsonBodyAssertion);
     }
 
-    private function assertFailingMessage(): string
+    private function addAssertion(Assertion $assertion): void
     {
-        return implode("\n", $this->failedAssertingMessages);
+        $this->assertions[] = $assertion;
     }
 }
