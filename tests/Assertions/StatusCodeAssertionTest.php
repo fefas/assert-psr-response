@@ -2,11 +2,13 @@
 
 namespace Fefas\AssertPsrResponse\Assertions;
 
-use Psr\Http\Message\ResponseInterface;
 use PHPUnit\Framework\TestCase;
+use Fefas\AssertPsrResponse\PsrResponseDoubleBuilder;
 
 class StatusCodeAssertionTest extends TestCase
 {
+    use PsrResponseDoubleBuilder;
+
     /**
      * @test
      */
@@ -60,15 +62,5 @@ class StatusCodeAssertionTest extends TestCase
             'Failed asserting response status code \'500\' to the expected \'200\'',
             $failedMessage
         );
-    }
-
-    private function responseWithStatusCode(int $statusCode): ResponseInterface
-    {
-        $response = $this->createMock(ResponseInterface::class);
-        $response
-            ->method('getStatusCode')
-            ->willReturn($statusCode);
-
-        return $response;
     }
 }

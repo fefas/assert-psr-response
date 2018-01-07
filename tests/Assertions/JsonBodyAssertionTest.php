@@ -2,12 +2,13 @@
 
 namespace Fefas\AssertPsrResponse\Assertions;
 
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\StreamInterface as ResponseBody;
 use PHPUnit\Framework\TestCase;
+use Fefas\AssertPsrResponse\PsrResponseDoubleBuilder;
 
 class JsonBodyAssertionTest extends TestCase
 {
+    use PsrResponseDoubleBuilder;
+
     /**
      * @test
      */
@@ -61,20 +62,5 @@ class JsonBodyAssertionTest extends TestCase
             'Failed asserting response json body \'[1,2,3]\' to the expected \'[1,2]\'',
             $failedMessage
         );
-    }
-
-    private function responseWithJsonBody(string $jsonBody): Response
-    {
-        $responseBody = $this->createMock(ResponseBody::class);
-        $responseBody
-            ->method('getContents')
-            ->willReturn($jsonBody);
-
-        $response = $this->createMock(Response::class);
-        $response
-            ->method('getBody')
-            ->willReturn($responseBody);
-
-        return $response;
     }
 }

@@ -2,11 +2,13 @@
 
 namespace Fefas\AssertPsrResponse\Assertions;
 
-use Psr\Http\Message\ResponseInterface;
 use PHPUnit\Framework\TestCase;
+use Fefas\AssertPsrResponse\PsrResponseDoubleBuilder;
 
 class HeaderLineAssertionTest extends TestCase
 {
+    use PsrResponseDoubleBuilder;
+
     /**
      * @test
      */
@@ -76,18 +78,5 @@ class HeaderLineAssertionTest extends TestCase
             'Failed asserting response header line \'Content-Type\' \'text/html\' to the expected \'application/json\'',
             $failedMessage
         );
-    }
-
-    private function responseWithHeaderLine(
-        string $headerName,
-        string $headerValue
-    ): ResponseInterface {
-        $response = $this->createMock(ResponseInterface::class);
-        $response
-            ->method('getHeaderLine')
-            ->with($this->equalTo($headerName))
-            ->willReturn($headerValue);
-
-        return $response;
     }
 }

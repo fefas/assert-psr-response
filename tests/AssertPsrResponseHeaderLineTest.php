@@ -4,14 +4,15 @@ namespace Fefas\AssertPsrResponse;
 
 use RuntimeException;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\ResponseInterface;
 
 class AssertPsrResponseHeaderLineTest extends TestCase
 {
+    use PsrResponseDoubleBuilder;
+
     /**
      * @test
      */
-    public function dontThrowAnyExceptionWhenHeaderLineIsEqual(): void
+    public function dontThrowAnyExceptionIfHeaderLineEqualsTheExpected(): void
     {
         $responseStub = $this->responseWithHeaderLine('Content-Type', 'text/html');
         $assertPsrResponse = new AssertPsrResponse($responseStub);
@@ -26,7 +27,7 @@ class AssertPsrResponseHeaderLineTest extends TestCase
     /**
      * @test
      */
-    public function throwRuntimeExceptionWhenHeaderLineIsNotEqual(): void
+    public function throwRuntimeExceptionWhenHeaderLineNotEqualsTheExpected(): void
     {
         $responseStub = $this->responseWithHeaderLine('Content-Type', 'text/html');
         $assertPsrResponse = new AssertPsrResponse($responseStub);
@@ -39,17 +40,5 @@ class AssertPsrResponseHeaderLineTest extends TestCase
         );
 
         $assertPsrResponse->assert();
-    }
-
-    private function responseWithHeaderLine(
-        string $headerName,
-        string $headerValue
-    ): ResponseInterface {
-        $response = $this->createMock(ResponseInterface::class);
-        $response
-            ->method('getHeaderLine')
-            ->willReturn($headerValue);
-
-        return $response;
     }
 }

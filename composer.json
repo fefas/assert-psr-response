@@ -26,6 +26,12 @@
         ]
     },
 
+    "autoload-dev": {
+        "psr-4": {
+            "Fefas\\AssertPsrResponse\\": "tests/"
+        }
+    },
+
     "minimum-stability": "stable",
 
     "require": {
