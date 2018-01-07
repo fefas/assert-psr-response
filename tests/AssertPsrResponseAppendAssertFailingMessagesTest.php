@@ -20,8 +20,8 @@ class AssertPsrResponseAppendAssertFailingMessagesTest extends TestCase
         );
         $assertPsrResponse = new AssertPsrResponse($responseStub);
 
-        $assertPsrResponse->statusCodeToAssert(200);
-        $assertPsrResponse->headerLineToAssert('Content-Type', 'application/json');
+        $assertPsrResponse->addStatusCodeToAssert(200);
+        $assertPsrResponse->addHeaderLineToAssert('Content-Type', 'application/json');
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(<<<MSG

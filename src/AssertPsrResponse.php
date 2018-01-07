@@ -24,7 +24,7 @@ class AssertPsrResponse
         throw new RuntimeException($this->assertFailingMessage());
     }
 
-    public function statusCodeToAssert(int $expected): void
+    public function addStatusCodeToAssert(int $expected): void
     {
         $current = $this->responseToAssert->getStatusCode();
 
@@ -33,7 +33,7 @@ class AssertPsrResponse
         }
     }
 
-    public function headerLineToAssert(string $name, string $expected): void
+    public function addHeaderLineToAssert(string $name, string $expected): void
     {
         $current = $this->responseToAssert->getHeaderLine($name);
 
@@ -42,7 +42,7 @@ class AssertPsrResponse
         }
     }
 
-    public function jsonBodyContentToAssert(string $expected): void
+    public function addJsonBodyContentToAssert(string $expected): void
     {
         $current = $this->responseToAssert->getBody()->getContents();
 

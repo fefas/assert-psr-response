@@ -16,7 +16,7 @@ class AssertPsrResponseStatusCodeTest extends TestCase
         $responseStub = $this->responseWithStatusCode(200);
         $assertPsrResponse = new AssertPsrResponse($responseStub);
 
-        $assertPsrResponse->statusCodeToAssert(200);
+        $assertPsrResponse->addStatusCodeToAssert(200);
         $assertResult = $assertPsrResponse->assert();
 
         $this->assertTrue($assertResult);
@@ -30,7 +30,7 @@ class AssertPsrResponseStatusCodeTest extends TestCase
         $responseStub = $this->responseWithStatusCode(500);
         $assertPsrResponse = new AssertPsrResponse($responseStub);
 
-        $assertPsrResponse->statusCodeToAssert(200);
+        $assertPsrResponse->addStatusCodeToAssert(200);
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(
