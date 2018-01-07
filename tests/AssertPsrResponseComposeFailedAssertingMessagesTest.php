@@ -23,7 +23,7 @@ class AssertPsrResponseComposeFailedAssertingMessagesTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(<<<MSG
 Failed asserting response status code '500' to the expected '200'
-Failed asserting response header line 'Content-Type' 'text/html' to the expected 'application/json
+Failed asserting response header line 'Content-Type' 'text/html' to the expected 'application/json'
 MSG
         );
 
