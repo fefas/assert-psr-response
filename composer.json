@@ -12,6 +12,8 @@
         }
     ],
 
+    "keywors": ["psr-7", "assert"],
+
     "scripts": {
         "test:cs": "phpcs --colors -ps",
         "test:unit": "phpunit --colors=always"
