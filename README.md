@@ -28,45 +28,95 @@ Install it using [Composer](https://getcomposer.org/):
 $ composer require fefas/assert-psr-response
 ```
 
+## Available Assertions
+
+Here is all available assertions so far:
+
+* Status Code: `addStatusCodeToAssert(int $expectedStatusCode)`
+* Header Line: `addHeaderLineToAssert(string $headerName, $expectedHeaderLine)`
+* JSON Body: `addJsonBodyToAssert(string $expectedJsonBody)`
+
 ## Usage
 
 The class `AssertPsrResponse` allows the assertion of certain PSR-7 response
 values. That means you don't have to verify the hole PSR-7 response object,
 instead you can just assert the fields which are relevants for your current
-case:
+case. See the samples bellow:
 
-```php
-use Fefas\AssertPsrResponse\AssertPsrResponse;
+1. Assert Status Code that matches the expected:
 
-$responseToAssert = // retrieve it from somewhere ...
+   ```php
+   <?php
 
-// Sample 1 - positive assertion
-$responseToAssert = $responseToAssert
-    ->withStatus(200)
-    ->withHeader('Content-Type', 'application/json');
+   use Fefas\AssertPsrResponse\AssertPsrResponse;
 
-$assertPsrResponse = new AssertPsrResponse($responseToAssert);
+   $psrResponse = // retrieve it from somewhere ...
+   $psrResponse = $psrResponse->withStatus(200);
 
-$assertPsrResponse->addStatusCodeToAssert(200);
-$assertPsrResponse->addHeaderLineToAssert('Content-Type', 'application/json');
+   $assertPsrResponse = new AssertPsrResponse($psrResponse);
+   $assertPsrResponse->addStatusCodeToAssert(200);
 
-$assertPsrResponse->assert(); // don't throw any exception
+   $assertPsrResponse->assert();
+   // return true and don't throw any exception
+   ```
 
-// Sample 2 - negative assertion
-$responseToAssert = $responseToAssert
-    ->withStatus(500)
-    ->withHeader('Content-Type', 'text/html');
+2. Assert Status Code that doesn't match the expected
 
-$assertPsrResponse = new AssertPsrResponse($responseToAssert);
+   ```php
+   <?php
 
-$assertPsrResponse->addStatusCodeToAssert(200);
-$assertPsrResponse->addHeaderLineToAssert('Content-Type', 'application/json');
+   use Fefas\AssertPsrResponse\AssertPsrResponse;
 
-$assertPsrResponse->assert(); // throw \RuntimeException with two failed asserting messages
-```
+   $psrResponse = // retrieve it from somewhere ...
+   $psrResponse = $psrResponse->withStatus(500);
 
-Available assertions so far:
+   $assertPsrResponse = new AssertPsrResponse($psrResponse);
+   $assertPsrResponse->addStatusCodeToAssert(200);
 
-* Status Code
-* Header Line
-* JSON Body Content
+   $assertPsrResponse->assert();
+   // throw RuntimeException with message:
+   // Failed asserting response status code '500' to the expected '200'
+   ```
+
+3. Assert Status Code and Header Line that match partly the expected
+
+   ```php
+   <?php
+
+   use Fefas\AssertPsrResponse\AssertPsrResponse;
+
+   $psrResponse = // retrieve it from somewhere ...
+   $psrResponse = $psrResponse
+     ->withStatus(200)
+     ->withHeader('Content-Type', 'application/json');
+
+   $assertPsrResponse = new AssertPsrResponse($psrResponse);
+   $assertPsrResponse->addStatusCodeToAssert(200);
+   $assertPsrResponse->addHeaderLineToAssert('Content-Type', 'text/html');
+
+   $assertPsrResponse->assert();
+   // throw RuntimeException with message:
+   // Failed asserting response header line 'Content-Type' 'application/json' to the expected 'text/html'
+   ```
+
+4. Assert Status Code and Header Line that none match the expected
+
+   ```php
+   <?php
+
+   use Fefas\AssertPsrResponse\AssertPsrResponse;
+
+   $psrResponse = // retrieve it from somewhere ...
+   $psrResponse = $psrResponse
+     ->withStatus(500)
+     ->withHeader('Content-Type', 'text/html');
+
+   $assertPsrResponse = new AssertPsrResponse($psrResponse);
+   $assertPsrResponse->addStatusCodeToAssert(200);
+   $assertPsrResponse->addHeaderLineToAssert('Content-Type', 'application/json');
+
+   $assertPsrResponse->assert();
+   // throw RuntimeException with message:
+   // Failed asserting response status code '500' to the expected '200'
+   // Failed asserting response header line 'Content-Type' 'text/html' to the expected 'application/json'
+   ```
