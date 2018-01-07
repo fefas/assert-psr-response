@@ -6,14 +6,19 @@
 [![License](https://poser.pugx.org/bauhaus/middleware-chain/license?format=flat-square)](LICENSE)
 [![composer.lock](https://poser.pugx.org/fefas/assert-psr-response/composerlock?format=flat-square)](https://packagist.org/packages/fefas/assert-psr-response)
 
+> **Important** this package won't worry about backward compatibily for `v0.*`
+> versions.
+
 # Assert PSR Response
 
 This composer package aims to provide an easy way to assert
 [PSR-7](http://www.php-fig.org/psr/psr-7/) responses.
 
-> I created it because my constant need to assert certain values of PSR
-> responses during feature testing of APIs using the
-> [Behat](http://behat.org/en/latest/) framework.
+## Motivation
+
+I created this package because my constant need to assert only certain values of
+PSR responses during testing, for example feature APIs testing using the
+[Behat](http://behat.org/en/latest/) framework.
 
 ## Installation
 
@@ -25,9 +30,10 @@ $ composer require fefas/assert-psr-response
 
 ## Usage
 
-The class `AssertPsrResponse` allows the assertion of certain fields of a
-response. That means you don't need to verify the hole response object, instead
-you can just assert that fields that are relevants for your current workflow:
+The class `AssertPsrResponse` allows the assertion of certain PSR-7 response
+values. That means you don't have to verify the hole PSR-7 response object,
+instead you can just assert the fields which are relevants for your current
+case:
 
 ```php
 use Fefas\AssertPsrResponse\AssertPsrResponse;
@@ -41,8 +47,8 @@ $responseToAssert = $responseToAssert
 
 $assertPsrResponse = new AssertPsrResponse($responseToAssert);
 
-$assertPsrResponse->statusCodeToAssert(200);
-$assertPsrResponse->headerLineToAssert('Content-Type', 'application/json');
+$assertPsrResponse->addStatusCodeToAssert(200);
+$assertPsrResponse->addHeaderLineToAssert('Content-Type', 'application/json');
 
 $assertPsrResponse->assert(); // don't throw any exception
 
@@ -53,8 +59,8 @@ $responseToAssert = $responseToAssert
 
 $assertPsrResponse = new AssertPsrResponse($responseToAssert);
 
-$assertPsrResponse->statusCodeToAssert(200);
-$assertPsrResponse->headerLineToAssert('Content-Type', 'application/json');
+$assertPsrResponse->addStatusCodeToAssert(200);
+$assertPsrResponse->addHeaderLineToAssert('Content-Type', 'application/json');
 
 $assertPsrResponse->assert(); // throw \RuntimeException with two failed asserting messages
 ```
