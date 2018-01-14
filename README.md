@@ -99,8 +99,8 @@ case. See the samples bellow:
 
    $psrResponse = // retrieve it from somewhere ...
    $psrResponse = $psrResponse
-     ->withStatus(200)
-     ->withHeader('Content-Type', 'application/json');
+       ->withStatus(200)
+       ->withHeader('Content-Type', 'application/json');
 
    $assertPsrResponse = new AssertPsrResponse($psrResponse);
    $assertPsrResponse->matchStatusCode(200);
@@ -120,8 +120,8 @@ case. See the samples bellow:
 
    $psrResponse = // retrieve it from somewhere ...
    $psrResponse = $psrResponse
-     ->withStatus(500)
-     ->withHeader('Content-Type', 'text/html');
+       ->withStatus(500)
+       ->withHeader('Content-Type', 'text/html');
 
    $assertPsrResponse = new AssertPsrResponse($psrResponse);
    $assertPsrResponse->matchStatusCode(200);
