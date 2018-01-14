@@ -6,15 +6,15 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 class StatusCodeMatcher extends ScalarEqualsMatcher
 {
-    public function __construct(int $expectedStatusCode, Response $responseToAssert)
+    public function __construct(int $expected, Response $responseToAssert)
     {
-        $statusCodeToAssert = $responseToAssert->getStatusCode();
+        $toAssert = $responseToAssert->getStatusCode();
         $mismatchMessageParams = [
-            $statusCodeToAssert,
-            $expectedStatusCode,
+            $toAssert,
+            $expected,
         ];
 
-        parent::__construct($expectedStatusCode, $statusCodeToAssert, $mismatchMessageParams);
+        parent::__construct($expected, $toAssert, $mismatchMessageParams);
     }
 
     protected function mismatchMessageTemplate(): string

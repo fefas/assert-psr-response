@@ -6,18 +6,16 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 class HeaderLineMatcher extends ScalarEqualsMatcher
 {
-    public function __construct(
-        string $expectedHeaderLine,
-        string $headerName,
-        Response $responseToAssert
-    ) {
-        $headerLineToAssert = $responseToAssert->getHeaderLine($headerName);
-
-        parent::__construct($expectedHeaderLine, $headerLineToAssert, [
+    public function __construct(string $expected, string $headerName, Response $responseToAssert)
+    {
+        $toAssert = $responseToAssert->getHeaderLine($headerName);
+        $mismatchMessageTemplate =  [
             $headerName,
-            $headerLineToAssert,
-            $expectedHeaderLine,
-        ]);
+            $toAssert,
+            $expected,
+        ];
+
+        parent::__construct($expected, $toAssert, $mismatchMessageTemplate);
     }
 
     protected function mismatchMessageTemplate(): string

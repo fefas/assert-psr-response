@@ -13,23 +13,19 @@ class JsonBodyMatcher implements Matcher
     private $match = true;
     private $mismatchMessage;
 
-    public function __construct(string $expectedJsonBody, Response $responseToAssert)
+    public function __construct(string $expected, Response $responseToAssert)
     {
-        $jsonBodyToAssert = $responseToAssert->getBody()->getContents();
+        $toAssert = $responseToAssert->getBody()->getContents();
 
-        $expectedJson = Json::createFromString($expectedJsonBody);
-        $jsonToAssert = Json::createFromString($jsonBodyToAssert);
+        $expected = Json::createFromString($expected);
+        $toAssert = Json::createFromString($toAssert);
 
-        if ($jsonToAssert->isEqualTo($expectedJson)) {
+        if ($toAssert->isEqualTo($expected)) {
             return;
         }
 
         $this->match = false;
-
-        $this->mismatchMessage = $this->buildMismatchMessage(
-            $expectedJsonBody,
-            $jsonBodyToAssert
-        );
+        $this->mismatchMessage = $this->buildMismatchMessage($expected, $toAssert);
     }
 
     public function match(): bool

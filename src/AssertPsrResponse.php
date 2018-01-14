@@ -11,12 +11,12 @@ use Fefas\AssertPsrResponse\Matchers\StatusCodeMatcher;
 
 class AssertPsrResponse
 {
-    private $responseToAssert;
+    private $response;
     private $matchers = [];
 
-    public function __construct(Response $responseToAssert)
+    public function __construct(Response $response)
     {
-        $this->responseToAssert = $responseToAssert;
+        $this->response = $response;
     }
 
     public function assert(): bool
@@ -37,33 +37,23 @@ class AssertPsrResponse
         throw new RuntimeException(implode("\n", $mismatchMessages));
     }
 
-    public function matchStatusCode(int $expectedStatusCode): void
+    public function matchStatusCode(int $expected): void
     {
-        $statusCodeMatcher = new StatusCodeMatcher(
-            $expectedStatusCode,
-            $this->responseToAssert
-        );
+        $statusCodeMatcher = new StatusCodeMatcher($expected, $this->response);
 
         $this->addMatcher($statusCodeMatcher);
     }
 
-    public function matchHeaderLine(string $headerName, string $expectedHeaderLine): void
+    public function matchHeaderLine(string $headerName, string $expected): void
     {
-        $headerLineMatcher = new HeaderLineMatcher(
-            $expectedHeaderLine,
-            $headerName,
-            $this->responseToAssert
-        );
+        $headerLineMatcher = new HeaderLineMatcher($expected, $headerName, $this->response);
 
         $this->addMatcher($headerLineMatcher);
     }
 
-    public function matchJsonBodyContent(string $expectedJsonBody): void
+    public function matchJsonBody(string $expected): void
     {
-        $jsonBodyMatcher = new JsonBodyMatcher(
-            $expectedJsonBody,
-            $this->responseToAssert
-        );
+        $jsonBodyMatcher = new JsonBodyMatcher($expected, $this->response);
 
         $this->addMatcher($jsonBodyMatcher);
     }

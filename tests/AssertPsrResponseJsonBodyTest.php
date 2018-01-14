@@ -17,7 +17,7 @@ class AssertPsrResponseJsonBodyTest extends TestCase
         $responseStub = $this->responseWithJsonBody('[1,2,3]');
         $assertPsrResponse = new AssertPsrResponse($responseStub);
 
-        $assertPsrResponse->matchJsonBodyContent('[1,2,3]');
+        $assertPsrResponse->matchJsonBody('[1,2,3]');
         $assertResult = $assertPsrResponse->assert();
 
         $this->assertTrue($assertResult);
@@ -31,7 +31,7 @@ class AssertPsrResponseJsonBodyTest extends TestCase
         $responseStub = $this->responseWithJsonBody('[1,3]');
         $assertPsrResponse = new AssertPsrResponse($responseStub);
 
-        $assertPsrResponse->matchJsonBodyContent('[1,2]');
+        $assertPsrResponse->matchJsonBody('[1,2]');
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(
