@@ -9,10 +9,7 @@ class StatusCodeMatcher extends ScalarEqualsMatcher
     public function __construct(int $expected, Response $responseToAssert)
     {
         $toAssert = $responseToAssert->getStatusCode();
-        $mismatchMessageParams = [
-            $toAssert,
-            $expected,
-        ];
+        $mismatchMessageParams = [$toAssert, $expected];
 
         parent::__construct($expected, $toAssert, $mismatchMessageParams);
     }
