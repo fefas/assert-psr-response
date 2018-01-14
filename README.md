@@ -35,17 +35,17 @@ Here are the available matchers so far:
 
 * Status Code:
   ```php
-  matchStatusCode(int $expectedStatusCode): void
+  matchStatusCode(int $expected): void
   ```
 
 * Header Line:
   ```php
-  matchHeaderLine(string $headerName, string $expectedHeaderLine): void
+  matchHeaderLine(string $headerName, string $expected): void
   ```
 
 * JSON Body:
   ```php
-  matchJsonBody(string $expectedJsonBody): void
+  matchJsonBody(string $expected): void
   ```
 
 ## Usage
