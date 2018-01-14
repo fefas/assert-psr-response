@@ -56,7 +56,6 @@ trait PsrResponseDoubleBuilderTrait
 
         $response
             ->method('getHeaderLine')
-            ->with($this->equalTo($headerName))
             ->willReturn($headerValue);
 
         return $response;

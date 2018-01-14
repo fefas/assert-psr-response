@@ -3,7 +3,6 @@
 namespace Fefas\AssertPsrResponse;
 
 use Psr\Http\Message\ResponseInterface as Response;
-use Fefas\AssertPsrResponse\Matchers\Matcher;
 use Fefas\AssertPsrResponse\Matchers\HeaderLineMatcher;
 use Fefas\AssertPsrResponse\Matchers\JsonBodyMatcher;
 use Fefas\AssertPsrResponse\Matchers\StatusCodeMatcher;
@@ -40,25 +39,20 @@ class AssertPsrResponse
     {
         $statusCodeMatcher = new StatusCodeMatcher($expected, $this->response);
 
-        $this->addMatcher($statusCodeMatcher);
+        $this->matchers[StatusCodeMatcher::class] = $statusCodeMatcher;
     }
 
     public function matchHeaderLine(string $headerName, string $expected): void
     {
         $headerLineMatcher = new HeaderLineMatcher($expected, $headerName, $this->response);
 
-        $this->addMatcher($headerLineMatcher);
+        $this->matchers[HeaderLineMatcher::class.$headerName] = $headerLineMatcher;
     }
 
     public function matchJsonBody(string $expected): void
     {
         $jsonBodyMatcher = new JsonBodyMatcher($expected, $this->response);
 
-        $this->addMatcher($jsonBodyMatcher);
-    }
-
-    private function addMatcher(Matcher $matcher): void
-    {
-        $this->matchers[] = $matcher;
+        $this->matchers[JsonBodyMatcher::class] = $jsonBodyMatcher;
     }
 }
