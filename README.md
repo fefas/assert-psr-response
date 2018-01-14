@@ -32,9 +32,9 @@ $ composer require fefas/assert-psr-response
 
 Here is all available assertions so far:
 
-* Status Code: `addStatusCodeToAssert(int $expectedStatusCode)`
-* Header Line: `addHeaderLineToAssert(string $headerName, $expectedHeaderLine)`
-* JSON Body: `addJsonBodyToAssert(string $expectedJsonBody)`
+* Status Code: `matchStatusCode(int $expectedStatusCode)`
+* Header Line: `matchHeaderLine(string $headerName, $expectedHeaderLine)`
+* JSON Body: `matchJsonBody(string $expectedJsonBody)`
 
 ## Usage
 
@@ -54,7 +54,7 @@ case. See the samples bellow:
    $psrResponse = $psrResponse->withStatus(200);
 
    $assertPsrResponse = new AssertPsrResponse($psrResponse);
-   $assertPsrResponse->addStatusCodeToAssert(200);
+   $assertPsrResponse->matchStatusCode(200);
 
    $assertPsrResponse->assert();
    // return true and don't throw any exception
@@ -71,11 +71,11 @@ case. See the samples bellow:
    $psrResponse = $psrResponse->withStatus(500);
 
    $assertPsrResponse = new AssertPsrResponse($psrResponse);
-   $assertPsrResponse->addStatusCodeToAssert(200);
+   $assertPsrResponse->matchStatusCode(200);
 
    $assertPsrResponse->assert();
    // throw RuntimeException with message:
-   // Failed asserting response status code '500' to the expected '200'
+   // Failed matching response status code '500' with the expected '200'
    ```
 
 3. Assert Status Code and Header Line that match partly the expected
@@ -91,12 +91,12 @@ case. See the samples bellow:
      ->withHeader('Content-Type', 'application/json');
 
    $assertPsrResponse = new AssertPsrResponse($psrResponse);
-   $assertPsrResponse->addStatusCodeToAssert(200);
-   $assertPsrResponse->addHeaderLineToAssert('Content-Type', 'text/html');
+   $assertPsrResponse->matchStatusCode(200);
+   $assertPsrResponse->matchHeaderLine('Content-Type', 'text/html');
 
    $assertPsrResponse->assert();
    // throw RuntimeException with message:
-   // Failed asserting response header line 'Content-Type' 'application/json' to the expected 'text/html'
+   // Failed matching response header line 'Content-Type' 'application/json' with the expected 'text/html'
    ```
 
 4. Assert Status Code and Header Line that don't match the expected
@@ -112,13 +112,13 @@ case. See the samples bellow:
      ->withHeader('Content-Type', 'text/html');
 
    $assertPsrResponse = new AssertPsrResponse($psrResponse);
-   $assertPsrResponse->addStatusCodeToAssert(200);
-   $assertPsrResponse->addHeaderLineToAssert('Content-Type', 'application/json');
+   $assertPsrResponse->matchStatusCode(200);
+   $assertPsrResponse->matchHeaderLine('Content-Type', 'application/json');
 
    $assertPsrResponse->assert();
    // throw RuntimeException with message:
-   // Failed asserting response status code '500' to the expected '200'
-   // Failed asserting response header line 'Content-Type' 'text/html' to the expected 'application/json'
+   // Failed matching response status code '500' with the expected '200'
+   // Failed matching response header line 'Content-Type' 'text/html' with the expected 'application/json'
    ```
 
 ## Contribution
