@@ -2,7 +2,6 @@
 
 namespace Fefas\AssertPsrResponse;
 
-use RuntimeException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Fefas\AssertPsrResponse\Matchers\Matcher;
 use Fefas\AssertPsrResponse\Matchers\HeaderLineMatcher;
@@ -34,7 +33,7 @@ class AssertPsrResponse
             return true;
         }
 
-        throw new RuntimeException(implode("\n", $mismatchMessages));
+        throw new AssertPsrResponseException($mismatchMessages);
     }
 
     public function matchStatusCode(int $expected): void
