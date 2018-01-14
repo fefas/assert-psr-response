@@ -17,7 +17,7 @@ class AssertPsrResponseStatusCodeTest extends TestCase
         $responseStub = $this->responseWithStatusCode(200);
         $assertPsrResponse = new AssertPsrResponse($responseStub);
 
-        $assertPsrResponse->addStatusCodeToAssert(200);
+        $assertPsrResponse->matchStatusCode(200);
         $assertResult = $assertPsrResponse->assert();
 
         $this->assertTrue($assertResult);
@@ -31,11 +31,11 @@ class AssertPsrResponseStatusCodeTest extends TestCase
         $responseStub = $this->responseWithStatusCode(500);
         $assertPsrResponse = new AssertPsrResponse($responseStub);
 
-        $assertPsrResponse->addStatusCodeToAssert(200);
+        $assertPsrResponse->matchStatusCode(200);
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(
-            "Failed asserting response status code '500' to the expected '200'"
+            "Failed matching response status code '500' with the expected '200'"
         );
 
         $assertPsrResponse->assert();

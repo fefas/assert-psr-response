@@ -17,7 +17,7 @@ class AssertPsrResponseHeaderLineTest extends TestCase
         $responseStub = $this->responseWithHeaderLine('Content-Type', 'text/html');
         $assertPsrResponse = new AssertPsrResponse($responseStub);
 
-        $assertPsrResponse->addHeaderLineToAssert('Content-Type', 'text/html');
+        $assertPsrResponse->matchHeaderLine('Content-Type', 'text/html');
 
         $assertResult = $assertPsrResponse->assert();
 
@@ -32,11 +32,11 @@ class AssertPsrResponseHeaderLineTest extends TestCase
         $responseStub = $this->responseWithHeaderLine('Content-Type', 'text/html');
         $assertPsrResponse = new AssertPsrResponse($responseStub);
 
-        $assertPsrResponse->addHeaderLineToAssert('Content-Type', 'application/json');
+        $assertPsrResponse->matchHeaderLine('Content-Type', 'application/json');
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(
-            "Failed asserting response header line 'Content-Type' 'text/html' to the expected 'application/json'"
+            "Failed matching response header line 'Content-Type' 'text/html' with the expected 'application/json'"
         );
 
         $assertPsrResponse->assert();

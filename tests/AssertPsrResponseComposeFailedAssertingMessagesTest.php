@@ -17,13 +17,13 @@ class AssertPsrResponseComposeFailedAssertingMessagesTest extends TestCase
         $responseStub = $this->responseWithStatusCodeAndHeaderLine(500, 'Content-Type', 'text/html');
         $assertPsrResponse = new AssertPsrResponse($responseStub);
 
-        $assertPsrResponse->addStatusCodeToAssert(200);
-        $assertPsrResponse->addHeaderLineToAssert('Content-Type', 'application/json');
+        $assertPsrResponse->matchStatusCode(200);
+        $assertPsrResponse->matchHeaderLine('Content-Type', 'application/json');
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(<<<MSG
-Failed asserting response status code '500' to the expected '200'
-Failed asserting response header line 'Content-Type' 'text/html' to the expected 'application/json'
+Failed matching response status code '500' with the expected '200'
+Failed matching response header line 'Content-Type' 'text/html' with the expected 'application/json'
 MSG
         );
 

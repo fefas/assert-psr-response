@@ -1,0 +1,82 @@
+<?php
+
+namespace Fefas\AssertPsrResponse\Matchers;
+
+use PHPUnit\Framework\TestCase;
+use Fefas\AssertPsrResponse\PsrResponseDoubleBuilder;
+
+class HeaderLineMatcherTest extends TestCase
+{
+    use PsrResponseDoubleBuilder;
+
+    /**
+     * @test
+     */
+    public function doesMatchIfResponseHeaderLineEqualsTheExpected(): void
+    {
+        $responseToAssert = $this->responseWithHeaderLine('Content-Type', 'text/html');
+        $headerLineMatcher = new HeaderLineMatcher(
+            'text/html',
+            'Content-Type',
+            $responseToAssert
+        );
+
+        $match = $headerLineMatcher->match();
+
+        $this->assertTrue($match);
+    }
+
+    /**
+     * @test
+     */
+    public function returnNullMismatchMessageIfResponseHeaderLineEqualsTheExpected(): void
+    {
+        $responseToAssert = $this->responseWithHeaderLine('Content-Type', 'text/html');
+        $headerLineMatcher = new HeaderLineMatcher(
+            'text/html',
+            'Content-Type',
+            $responseToAssert
+        );
+
+        $nullMismatchMessage = $headerLineMatcher->mismatchMessage();
+
+        $this->assertNull($nullMismatchMessage);
+    }
+
+    /**
+     * @test
+     */
+    public function doesNotMatchIfResponseHeaderLineNotEqualsTheExpected(): void
+    {
+        $responseToAssert = $this->responseWithHeaderLine('Content-Type', 'text/html');
+        $headerLineMatcher = new HeaderLineMatcher(
+            'application/json',
+            'Content-Type',
+            $responseToAssert
+        );
+
+        $match = $headerLineMatcher->match();
+
+        $this->assertFalse($match);
+    }
+
+    /**
+     * @test
+     */
+    public function returnMismatchMessageIfResponseHeaderLineNotEqualsTheExpected(): void
+    {
+        $responseToAssert = $this->responseWithHeaderLine('Content-Type', 'text/html');
+        $headerLineMatcher = new HeaderLineMatcher(
+            'application/json',
+            'Content-Type',
+            $responseToAssert
+        );
+
+        $mismatchMessage = $headerLineMatcher->mismatchMessage();
+
+        $this->assertEquals(
+            'Failed matching response header line \'Content-Type\' \'text/html\' with the expected \'application/json\'',
+            $mismatchMessage
+        );
+    }
+}

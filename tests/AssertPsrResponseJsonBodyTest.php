@@ -17,7 +17,7 @@ class AssertPsrResponseJsonBodyTest extends TestCase
         $responseStub = $this->responseWithJsonBody('[1,2,3]');
         $assertPsrResponse = new AssertPsrResponse($responseStub);
 
-        $assertPsrResponse->addJsonBodyContentToAssert('[1,2,3]');
+        $assertPsrResponse->matchJsonBodyContent('[1,2,3]');
         $assertResult = $assertPsrResponse->assert();
 
         $this->assertTrue($assertResult);
@@ -31,11 +31,11 @@ class AssertPsrResponseJsonBodyTest extends TestCase
         $responseStub = $this->responseWithJsonBody('[1,3]');
         $assertPsrResponse = new AssertPsrResponse($responseStub);
 
-        $assertPsrResponse->addJsonBodyContentToAssert('[1,2]');
+        $assertPsrResponse->matchJsonBodyContent('[1,2]');
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(
-            "Failed asserting response json body '[1,3]' to the expected '[1,2]'"
+            "Failed matching response json body '[1,3]' with the expected '[1,2]'"
         );
 
         $assertPsrResponse->assert();

@@ -4,15 +4,15 @@ namespace Fefas\AssertPsrResponse;
 
 use RuntimeException;
 use Psr\Http\Message\ResponseInterface as Response;
-use Fefas\AssertPsrResponse\Assertions\Assertion;
-use Fefas\AssertPsrResponse\Assertions\HeaderLineAssertion;
-use Fefas\AssertPsrResponse\Assertions\JsonBodyAssertion;
-use Fefas\AssertPsrResponse\Assertions\StatusCodeAssertion;
+use Fefas\AssertPsrResponse\Matchers\Matcher;
+use Fefas\AssertPsrResponse\Matchers\HeaderLineMatcher;
+use Fefas\AssertPsrResponse\Matchers\JsonBodyMatcher;
+use Fefas\AssertPsrResponse\Matchers\StatusCodeMatcher;
 
 class AssertPsrResponse
 {
     private $responseToAssert;
-    private $assertions = [];
+    private $matchers = [];
 
     public function __construct(Response $responseToAssert)
     {
@@ -21,55 +21,55 @@ class AssertPsrResponse
 
     public function assert(): bool
     {
-        $failedMessage = [];
-        foreach ($this->assertions as $assertion) {
-            if ($assertion->isFailed()) {
-                $failedMessage[] = $assertion->failedMessage();
+        $mismatchMessages = [];
+        foreach ($this->matchers as $matcher) {
+            if ($matcher->match()) {
+                continue;
             }
+
+            $mismatchMessages[] = $matcher->mismatchMessage();
         }
 
-        if (empty($failedMessage)) {
+        if (empty($mismatchMessages)) {
             return true;
         }
 
-        throw new RuntimeException(implode("\n", $failedMessage));
+        throw new RuntimeException(implode("\n", $mismatchMessages));
     }
 
-    public function addStatusCodeToAssert(int $expectedStatusCode): void
+    public function matchStatusCode(int $expectedStatusCode): void
     {
-        $statusCodeAssertion = new StatusCodeAssertion(
+        $statusCodeMatcher = new StatusCodeMatcher(
             $expectedStatusCode,
             $this->responseToAssert
         );
 
-        $this->addAssertion($statusCodeAssertion);
+        $this->addMatcher($statusCodeMatcher);
     }
 
-    public function addHeaderLineToAssert(
-        string $headerName,
-        string $expectedHeaderLine
-    ): void {
-        $headerLineAssertion = new HeaderLineAssertion(
+    public function matchHeaderLine(string $headerName, string $expectedHeaderLine): void
+    {
+        $headerLineMatcher = new HeaderLineMatcher(
             $expectedHeaderLine,
             $headerName,
             $this->responseToAssert
         );
 
-        $this->addAssertion($headerLineAssertion);
+        $this->addMatcher($headerLineMatcher);
     }
 
-    public function addJsonBodyContentToAssert(string $expectedJsonBody): void
+    public function matchJsonBodyContent(string $expectedJsonBody): void
     {
-        $jsonBodyAssertion = new JsonBodyAssertion(
+        $jsonBodyMatcher = new JsonBodyMatcher(
             $expectedJsonBody,
             $this->responseToAssert
         );
 
-        $this->addAssertion($jsonBodyAssertion);
+        $this->addMatcher($jsonBodyMatcher);
     }
 
-    private function addAssertion(Assertion $assertion): void
+    private function addMatcher(Matcher $matcher): void
     {
-        $this->assertions[] = $assertion;
+        $this->matchers[] = $matcher;
     }
 }

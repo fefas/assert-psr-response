@@ -1,10 +1,10 @@
 <?php
 
-namespace Fefas\AssertPsrResponse\Assertions;
+namespace Fefas\AssertPsrResponse\Matchers;
 
 use Psr\Http\Message\ResponseInterface as Response;
 
-class HeaderLineAssertion extends EqualsAssertion
+class HeaderLineMatcher extends ScalarEqualsMatcher
 {
     public function __construct(
         string $expectedHeaderLine,
@@ -20,8 +20,8 @@ class HeaderLineAssertion extends EqualsAssertion
         ]);
     }
 
-    protected function failedMessageTemplate(): string
+    protected function mismatchMessageTemplate(): string
     {
-        return 'Failed asserting response header line \'%s\' \'%s\' to the expected \'%s\'';
+        return 'Failed matching response header line \'%s\' \'%s\' with the expected \'%s\'';
     }
 }
