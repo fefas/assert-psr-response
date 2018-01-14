@@ -12,7 +12,7 @@ class AssertPsrResponseHeaderLineTest extends TestCase
     /**
      * @test
      */
-    public function dontThrowAnyExceptionIfHeaderLineEqualsTheExpected(): void
+    public function doNotThrowAnyExceptionIfHeaderLineEqualsTheExpected(): void
     {
         $responseStub = $this->responseWithHeaderLine('Content-Type', 'text/html');
         $assertPsrResponse = new AssertPsrResponse($responseStub);

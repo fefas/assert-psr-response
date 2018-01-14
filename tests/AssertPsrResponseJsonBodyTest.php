@@ -12,7 +12,7 @@ class AssertPsrResponseJsonBodyTest extends TestCase
     /**
      * @test
      */
-    public function dontThrowAnyExceptionWhenJsonBodyEqualsTheExpected(): void
+    public function doNotThrowAnyExceptionWhenJsonBodyEqualsTheExpected(): void
     {
         $responseStub = $this->responseWithJsonBody('[1,2,3]');
         $assertPsrResponse = new AssertPsrResponse($responseStub);
