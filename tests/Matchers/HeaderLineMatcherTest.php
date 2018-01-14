@@ -71,12 +71,12 @@ class HeaderLineMatcherTest extends TestCase
             'Content-Type',
             $responseToAssert
         );
+        $expectedMismatchMessage = <<<MSG
+Failed matching response header line 'Content-Type' 'text/html' with the expected 'application/json'
+MSG;
 
         $mismatchMessage = $headerLineMatcher->mismatchMessage();
 
-        $this->assertEquals(
-            'Failed matching response header line \'Content-Type\' \'text/html\' with the expected \'application/json\'',
-            $mismatchMessage
-        );
+        $this->assertEquals($expectedMismatchMessage, $mismatchMessage);
     }
 }
