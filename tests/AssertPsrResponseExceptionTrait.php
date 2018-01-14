@@ -2,7 +2,7 @@
 
 namespace Fefas\AssertPsrResponse;
 
-trait AssertExceptionTrait
+trait AssertPsrResponseExceptionTrait
 {
     private function expectAssertPsrResponseExceptionWithMessage(string $message): void
     {
