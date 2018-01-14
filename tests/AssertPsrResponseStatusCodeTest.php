@@ -14,7 +14,7 @@ class AssertPsrResponseStatusCodeTest extends TestCase
      */
     public function dontThrowAnyExceptionWhenStatusCodeEqualsTheExpected(): void
     {
-        $responseStub = $this->responseWithStatusCode(200);
+        $responseStub = $this->responseWithStatus(200);
         $assertPsrResponse = new AssertPsrResponse($responseStub);
 
         $assertPsrResponse->matchStatusCode(200);
@@ -28,7 +28,7 @@ class AssertPsrResponseStatusCodeTest extends TestCase
      */
     public function throwRuntimeExceptionWhenStatusCodeNotEqualsTheExpected(): void
     {
-        $responseStub = $this->responseWithStatusCode(500);
+        $responseStub = $this->responseWithStatus(500);
         $assertPsrResponse = new AssertPsrResponse($responseStub);
 
         $assertPsrResponse->matchStatusCode(200);

@@ -14,7 +14,7 @@ class AssertPsrResponseComposeFailedAssertingMessagesTest extends TestCase
      */
     public function throwRuntimeExceptionWithMoreThanOneFailedAssertingMessages(): void
     {
-        $responseStub = $this->responseWithStatusCodeAndHeaderLine(500, 'Content-Type', 'text/html');
+        $responseStub = $this->responseWithStatusAndHeaderLine(500, 'Content-Type', 'text/html');
         $assertPsrResponse = new AssertPsrResponse($responseStub);
 
         $assertPsrResponse->matchStatusCode(200);

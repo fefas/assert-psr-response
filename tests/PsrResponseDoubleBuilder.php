@@ -7,7 +7,7 @@ use Psr\Http\Message\StreamInterface as Stream;
 
 trait PsrResponseDoubleBuilder
 {
-    private function responseWithStatusCode(int $statusCode): Response
+    private function responseWithStatus(int $statusCode): Response
     {
         $response = $this->createMock(Response::class);
         $response
@@ -17,10 +17,8 @@ trait PsrResponseDoubleBuilder
         return $response;
     }
 
-    private function responseWithHeaderLine(
-        string $headerName,
-        string $headerValue
-    ): Response {
+    private function responseWithHeaderLine(string $headerName, string $headerValue): Response
+    {
         $response = $this->createMock(Response::class);
         $response
             ->method('getHeaderLine')
@@ -45,7 +43,7 @@ trait PsrResponseDoubleBuilder
         return $response;
     }
 
-    private function responseWithStatusCodeAndHeaderLine(
+    private function responseWithStatusAndHeaderLine(
         int $statusCode,
         string $headerName,
         string $headerValue
