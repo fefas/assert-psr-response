@@ -1,6 +1,7 @@
 {
     "name": "fefas/assert-psr-response",
     "description": "PHP package with class to assert PSR responses",
+    "keywors": ["psr-7", "psr", "assert", "response"],
 
     "type": "library",
     "license": "MIT",
@@ -11,8 +12,6 @@
             "email": "me@fefas.net"
         }
     ],
-
-    "keywors": ["psr-7", "assert"],
 
     "scripts": {
         "test:cs": "phpcs --colors -ps",
