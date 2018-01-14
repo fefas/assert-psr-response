@@ -28,13 +28,24 @@ Install it using [Composer](https://getcomposer.org/):
 $ composer require fefas/assert-psr-response
 ```
 
-## Available Assertions
+## Available Matchers
 
-Here is all available assertions so far:
+Here are the available matchers so far:
 
-* Status Code: `matchStatusCode(int $expectedStatusCode)`
-* Header Line: `matchHeaderLine(string $headerName, $expectedHeaderLine)`
-* JSON Body: `matchJsonBody(string $expectedJsonBody)`
+* Status Code:
+  ```php
+  matchStatusCode(int $expectedStatusCode): void
+  ```
+
+* Header Line:
+  ```php
+  matchHeaderLine(string $headerName, string $expectedHeaderLine): void
+  ```
+
+* JSON Body:
+  ```php
+  matchJsonBody(string $expectedJsonBody): void
+  ```
 
 ## Usage
 
