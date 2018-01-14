@@ -3,11 +3,11 @@
 namespace Fefas\AssertPsrResponse\Matchers;
 
 use PHPUnit\Framework\TestCase;
-use Fefas\AssertPsrResponse\PsrResponseDoubleBuilder;
+use Fefas\AssertPsrResponse\PsrResponseDoubleBuilderTrait;
 
 class JsonBodyMatcherTest extends TestCase
 {
-    use PsrResponseDoubleBuilder;
+    use PsrResponseDoubleBuilderTrait;
 
     /**
      * @test

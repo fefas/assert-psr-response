@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class AssertPsrResponseJsonBodyTest extends TestCase
 {
-    use PsrResponseDoubleBuilder;
+    use PsrResponseDoubleBuilderTrait;
 
     /**
      * @test

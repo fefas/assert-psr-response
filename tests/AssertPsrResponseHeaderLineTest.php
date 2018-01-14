@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class AssertPsrResponseHeaderLineTest extends TestCase
 {
-    use PsrResponseDoubleBuilder;
+    use PsrResponseDoubleBuilderTrait;
 
     /**
      * @test

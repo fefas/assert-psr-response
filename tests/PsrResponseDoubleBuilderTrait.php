@@ -5,7 +5,7 @@ namespace Fefas\AssertPsrResponse;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\StreamInterface as Stream;
 
-trait PsrResponseDoubleBuilder
+trait PsrResponseDoubleBuilderTrait
 {
     private function responseWithStatus(int $statusCode): Response
     {

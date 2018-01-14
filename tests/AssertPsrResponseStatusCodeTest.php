@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class AssertPsrResponseStatusCodeTest extends TestCase
 {
-    use PsrResponseDoubleBuilder;
+    use PsrResponseDoubleBuilderTrait;
 
     /**
      * @test

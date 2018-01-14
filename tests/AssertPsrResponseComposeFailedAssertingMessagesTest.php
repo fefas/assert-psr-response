@@ -7,7 +7,8 @@ use PHPUnit\Framework\TestCase;
 
 class AssertPsrResponseComposeFailedAssertingMessagesTest extends TestCase
 {
-    use PsrResponseDoubleBuilder;
+    use PsrResponseDoubleBuilderTrait;
+    use AssertExceptionTrait;
 
     /**
      * @test
