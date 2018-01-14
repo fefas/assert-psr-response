@@ -4,7 +4,7 @@ namespace Fefas\AssertPsrResponse;
 
 use PHPUnit\Framework\TestCase;
 
-class AssertPsrResponseComposeFailedAssertingMessagesTest extends TestCase
+class AssertPsrResponseComposeMismatchMessagesTest extends TestCase
 {
     use PsrResponseDoubleBuilderTrait;
     use AssertExceptionTrait;
@@ -12,19 +12,19 @@ class AssertPsrResponseComposeFailedAssertingMessagesTest extends TestCase
     /**
      * @test
      */
-    public function throwRuntimeExceptionWithMoreThanOneFailedAssertingMessages(): void
+    public function throwRuntimeExceptionWithMismatchMessagesComposed(): void
     {
         $expectedExceptionMessage = <<<MSG
 Failed matching response status code '500' with the expected '200'
 Failed matching response header line 'Content-Type' 'text/html' with the expected 'application/json'
-MSG
+MSG;
         $responseStub = $this->responseWithStatusAndHeaderLine(500, 'Content-Type', 'text/html');
         $assertPsrResponse = new AssertPsrResponse($responseStub);
 
         $assertPsrResponse->matchStatusCode(200);
         $assertPsrResponse->matchHeaderLine('Content-Type', 'application/json');
 
-        $this->expectExceptionMessage($expectedExceptionMessage);
+        $this->expectAssertPsrResponseExceptionWithMessage($expectedExceptionMessage);
         $assertPsrResponse->assert();
     }
 }
