@@ -15,7 +15,11 @@
 
     "scripts": {
         "test:cs": "phpcs --colors -ps",
-        "test:unit": "phpunit --colors=always"
+        "test:unit": "phpunit --colors=always --testdox",
+        "tests": [
+            "@test:cs",
+            "@test:unit"
+        ]
     },
 
     "autoload": {
