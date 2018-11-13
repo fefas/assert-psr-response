@@ -144,3 +144,4 @@ one is by coding:
 3. Run the locally tests before ubmiting a pull request:
   * To test code standards: `composer run test:cs`
   * To run unit tests: `composer run test:unit`
+  * To run all tests in a roll: `composer run tests`
