@@ -12,7 +12,7 @@ class JsonBodyMatcherTest extends TestCase
     /**
      * @test
      */
-    public function doesMatchIfResponseJsonBodyEqualsTheExpected(): void
+    public function matchIfResponseJsonBodyIsEqualToTheExpected(): void
     {
         $responseToAssert = $this->responseWithJsonBody('[1,2,3]');
         $jsonBodyMatcher = new JsonBodyMatcher('[1,2,3]', $responseToAssert);
@@ -25,7 +25,7 @@ class JsonBodyMatcherTest extends TestCase
     /**
      * @test
      */
-    public function returnNullMismatchMessageIfResponseJsonBodyEqualsTheExpected(): void
+    public function returnNullMismatchMessageIfResponseJsonBodyIsEqualToTheExpected(): void
     {
         $responseToAssert = $this->responseWithJsonBody('[1,2,3]');
         $jsonBodyMatcher = new JsonBodyMatcher('[1,2,3]', $responseToAssert);
@@ -38,7 +38,7 @@ class JsonBodyMatcherTest extends TestCase
     /**
      * @test
      */
-    public function doesNotMatchIfResponseJsonBodyNotEqualsTheExpected(): void
+    public function doesNotMatchIfResponseJsonBodyIsNotEqualToTheExpected(): void
     {
         $responseToAssert = $this->responseWithJsonBody('[1,2,3]');
         $jsonBodyMatcher = new JsonBodyMatcher('[1,2]', $responseToAssert);
@@ -51,7 +51,7 @@ class JsonBodyMatcherTest extends TestCase
     /**
      * @test
      */
-    public function returnMismatchMessageIfResponseJsonBodyNotEqualsTheExpected(): void
+    public function returnMismatchMessageIfResponseJsonBodyIsNotEqualToTheExpected(): void
     {
         $responseToAssert = $this->responseWithJsonBody('[1,2,3]');
         $jsonBodyMatcher = new JsonBodyMatcher('[1,2]', $responseToAssert);

@@ -12,7 +12,7 @@ class StatusCodeMatcherTest extends TestCase
     /**
      * @test
      */
-    public function doesMatchIfResponseStatusCodeEqualsTheExpected(): void
+    public function matchIfResponseStatusCodeIsEqualToTheExpected(): void
     {
         $responseToAssert = $this->responseWithStatus(200);
         $statusCodeMatcher = new StatusCodeMatcher(200, $responseToAssert);
@@ -38,7 +38,7 @@ class StatusCodeMatcherTest extends TestCase
     /**
      * @test
      */
-    public function doesNotMatchIfResponseStatusCodeNotEqualsTheExpected(): void
+    public function doesNotMatchIfResponseStatusCodeIsNotEqualToTheExpected(): void
     {
         $responseToAssert = $this->responseWithStatus(500);
         $statusCodeMatcher = new StatusCodeMatcher(200, $responseToAssert);
@@ -51,7 +51,7 @@ class StatusCodeMatcherTest extends TestCase
     /**
      * @test
      */
-    public function returnMismatchMessageIfResponseStatusCodeNotEqualsTheExpected(): void
+    public function returnMismatchMessageIfResponseStatusCodeIsNotEqualToTheExpected(): void
     {
         $responseToAssert = $this->responseWithStatus(500);
         $statusCodeMatcher = new StatusCodeMatcher(200, $responseToAssert);
