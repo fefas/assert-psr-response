@@ -12,7 +12,7 @@ class HeaderLineMatcherTest extends TestCase
     /**
      * @test
      */
-    public function doesMatchIfResponseHeaderLineEqualsTheExpected(): void
+    public function matchIfResponseHeaderLineIsEqualToTheExpected(): void
     {
         $responseToAssert = $this->responseWithHeaderLine('Content-Type', 'text/html');
         $headerLineMatcher = new HeaderLineMatcher(
@@ -29,7 +29,7 @@ class HeaderLineMatcherTest extends TestCase
     /**
      * @test
      */
-    public function returnNullMismatchMessageIfResponseHeaderLineEqualsTheExpected(): void
+    public function returnNullMismatchMessageIfResponseHeaderLineIsEqualToTheExpected(): void
     {
         $responseToAssert = $this->responseWithHeaderLine('Content-Type', 'text/html');
         $headerLineMatcher = new HeaderLineMatcher(
@@ -46,7 +46,7 @@ class HeaderLineMatcherTest extends TestCase
     /**
      * @test
      */
-    public function doesNotMatchIfResponseHeaderLineNotEqualsTheExpected(): void
+    public function doesNotMatchIfResponseHeaderLineIsNotEqualToTheExpected(): void
     {
         $responseToAssert = $this->responseWithHeaderLine('Content-Type', 'text/html');
         $headerLineMatcher = new HeaderLineMatcher(
@@ -63,7 +63,7 @@ class HeaderLineMatcherTest extends TestCase
     /**
      * @test
      */
-    public function returnMismatchMessageIfResponseHeaderLineNotEqualsTheExpected(): void
+    public function returnMismatchMessageIfResponseHeaderLineIsNotEqualToTheExpected(): void
     {
         $responseToAssert = $this->responseWithHeaderLine('Content-Type', 'text/html');
         $headerLineMatcher = new HeaderLineMatcher(
