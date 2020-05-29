@@ -6,13 +6,6 @@
     "type": "library",
     "license": "MIT",
 
-    "authors": [
-        {
-            "name": "Felipe Martins",
-            "email": "me@fefas.net"
-        }
-    ],
-
     "scripts": {
         "test:cs": "phpcs --colors -ps",
         "test:unit": "phpunit --colors=always --testdox",
