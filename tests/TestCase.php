@@ -1,13 +1,22 @@
 <?php
 
-namespace Fefas\AssertPsrResponse;
+namespace Bauhaus\AssertPsrResponse;
 
+use PHPUnit\Framework\TestCase as PhpUnitTestCase;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\StreamInterface as Stream;
 
-trait PsrResponseDoubleBuilderTrait
+abstract class TestCase extends PhpUnitTestCase
 {
-    private function responseWithStatus(int $statusCode): Response
+    protected function expectAssertPsrResponseExceptionWithMessage(string $message): void
+    {
+        $message = str_replace('/', '\/', $message);
+
+        $this->expectException(AssertPsrResponseException::class);
+        $this->expectExceptionMessageRegExp("/^$message$/");
+    }
+
+    protected function responseWithStatus(int $statusCode): Response
     {
         $response = $this->createMock(Response::class);
         $response
@@ -17,7 +26,7 @@ trait PsrResponseDoubleBuilderTrait
         return $response;
     }
 
-    private function responseWithHeaderLine(string $headerName, string $headerValue): Response
+    protected function responseWithHeaderLine(string $headerName, string $headerValue): Response
     {
         $response = $this->createMock(Response::class);
         $response
@@ -28,7 +37,7 @@ trait PsrResponseDoubleBuilderTrait
         return $response;
     }
 
-    private function responseWithJsonBody(string $jsonBody): Response
+    protected function responseWithJsonBody(string $jsonBody): Response
     {
         $responseBody = $this->createMock(Stream::class);
         $responseBody
@@ -43,7 +52,7 @@ trait PsrResponseDoubleBuilderTrait
         return $response;
     }
 
-    private function responseWithStatusAndHeaderLine(
+    protected function responseWithStatusAndHeaderLine(
         int $statusCode,
         string $headerName,
         string $headerValue

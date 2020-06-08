@@ -1,14 +1,11 @@
 <?php
 
-namespace Fefas\AssertPsrResponse\Matchers;
+namespace Bauhaus\AssertPsrResponse\Matchers;
 
-use PHPUnit\Framework\TestCase;
-use Fefas\AssertPsrResponse\PsrResponseDoubleBuilderTrait;
+use Bauhaus\AssertPsrResponse\TestCase;
 
 class HeaderLineMatcherTest extends TestCase
 {
-    use PsrResponseDoubleBuilderTrait;
-
     /**
      * @test
      */

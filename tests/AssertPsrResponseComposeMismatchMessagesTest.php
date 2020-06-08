@@ -1,14 +1,9 @@
 <?php
 
-namespace Fefas\AssertPsrResponse;
-
-use PHPUnit\Framework\TestCase;
+namespace Bauhaus\AssertPsrResponse;
 
 class AssertPsrResponseComposeMismatchMessagesTest extends TestCase
 {
-    use PsrResponseDoubleBuilderTrait;
-    use AssertPsrResponseExceptionTrait;
-
     /**
      * @test
      */

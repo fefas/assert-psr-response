@@ -1,11 +1,11 @@
 <?php
 
-namespace Fefas\AssertPsrResponse;
+namespace Bauhaus\AssertPsrResponse;
 
 use Psr\Http\Message\ResponseInterface as Response;
-use Fefas\AssertPsrResponse\Matchers\HeaderLineMatcher;
-use Fefas\AssertPsrResponse\Matchers\JsonBodyMatcher;
-use Fefas\AssertPsrResponse\Matchers\StatusCodeMatcher;
+use Bauhaus\AssertPsrResponse\Matchers\HeaderLineMatcher;
+use Bauhaus\AssertPsrResponse\Matchers\JsonBodyMatcher;
+use Bauhaus\AssertPsrResponse\Matchers\StatusCodeMatcher;
 
 class AssertPsrResponse
 {
