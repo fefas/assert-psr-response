@@ -13,7 +13,7 @@ abstract class TestCase extends PhpUnitTestCase
         $message = str_replace('/', '\/', $message);
 
         $this->expectException(AssertPsrResponseException::class);
-        $this->expectExceptionMessageRegExp("/^$message$/");
+        $this->expectExceptionMessageMatches("/^$message$/");
     }
 
     protected function responseWithStatus(int $statusCode): Response
