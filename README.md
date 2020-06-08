@@ -1,4 +1,4 @@
-[![Build Status](https://img.shields.io/github/workflow/status/bauhausphp/assert-psr-response/build?style=flat-square)
+[![Build Status](https://img.shields.io/github/workflow/status/bauhausphp/assert-psr-response/Build?style=flat-square)](https://github.com/bauhausphp/assert-psr-response/actions?query=workflow%3ABuild)
 [![Coverage](https://img.shields.io/coveralls/github/fefas/assert-psr-response.svg?style=flat-square)](https://coveralls.io/github/fefas/assert-psr-response)
 
 [![Latest Stable Version](https://poser.pugx.org/fefas/assert-psr-response/v/stable?format=flat-square)](https://packagist.org/packages/fefas/assert-psr-response)
