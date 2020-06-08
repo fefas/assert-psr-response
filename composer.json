@@ -1,7 +1,7 @@
 {
-    "name": "fefas/assert-psr-response",
+    "name": "bauhaus/assert-psr-response",
     "description": "PHP package with class to assert PSR responses",
-    "keywords": ["psr-7", "psr", "assert", "test"],
+    "keywords": ["psr-7", "assertion"],
 
     "type": "library",
     "license": "MIT",
