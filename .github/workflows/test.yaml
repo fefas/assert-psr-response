@@ -14,6 +14,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+        coverage: xdebug
+
     - name: Validate composer.json and composer.lock
       run: composer validate
 
@@ -35,8 +41,3 @@ jobs:
 
     - name: Test - unit
       run: composer run test:unit -- --coverage-clover ./coverage.xml
-
-    - name: Codecov
-      uses: codecov/codecov-action@v1.0.7
-      with:
-        fail_ci_if_error: true
