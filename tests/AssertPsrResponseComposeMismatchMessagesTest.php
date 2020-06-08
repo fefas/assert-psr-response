@@ -2,13 +2,8 @@
 
 namespace Bauhaus\AssertPsrResponse;
 
-use PHPUnit\Framework\TestCase;
-
 class AssertPsrResponseComposeMismatchMessagesTest extends TestCase
 {
-    use PsrResponseDoubleBuilderTrait;
-    use AssertPsrResponseExceptionTrait;
-
     /**
      * @test
      */

@@ -2,13 +2,10 @@
 
 namespace Bauhaus\AssertPsrResponse\Matchers;
 
-use PHPUnit\Framework\TestCase;
-use Bauhaus\AssertPsrResponse\PsrResponseDoubleBuilderTrait;
+use Bauhaus\AssertPsrResponse\TestCase;
 
 class StatusCodeMatcherTest extends TestCase
 {
-    use PsrResponseDoubleBuilderTrait;
-
     /**
      * @test
      */

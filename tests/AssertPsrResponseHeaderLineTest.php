@@ -2,13 +2,8 @@
 
 namespace Bauhaus\AssertPsrResponse;
 
-use PHPUnit\Framework\TestCase;
-
 class AssertPsrResponseHeaderLineTest extends TestCase
 {
-    use PsrResponseDoubleBuilderTrait;
-    use AssertPsrResponseExceptionTrait;
-
     /**
      * @test
      */
