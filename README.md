@@ -1,10 +1,10 @@
 [![Build Status](https://img.shields.io/github/workflow/status/bauhausphp/assert-psr-response/Build?style=flat-square)](https://github.com/bauhausphp/assert-psr-response/actions?query=workflow%3ABuild)
 [![Coverage](https://img.shields.io/codecov/c/github/bauhausphp/assert-psr-response?style=flat-square)](https://codecov.io/gh/bauhausphp/assert-psr-response)
 
-[![Latest Stable Version](https://poser.pugx.org/fefas/assert-psr-response/v/stable?format=flat-square)](https://packagist.org/packages/fefas/assert-psr-response)
-[![Total Downloads](https://poser.pugx.org/fefas/assert-psr-response/downloads?format=flat-square)](https://packagist.org/packages/fefas/assert-psr-response)
-[![Latest Unstable Version](https://poser.pugx.org/fefas/assert-psr-response/v/unstable?format=flat-square)](https://packagist.org/packages/fefas/assert-psr-response)
-[![License](https://poser.pugx.org/bauhaus/middleware-chain/license?format=flat-square)](LICENSE)
+[![Stable Version](https://img.shields.io/packagist/v/bauhaus/assert-psr-response?style=flat-square)](https://packagist.org/packages/bauhaus/assert-psr-response)
+[![Downloads](https://img.shields.io/packagist/dt/bauhaus/assert-psr-response?style=flat-square)](https://packagist.org/packages/bauhaus/assert-psr-response)
+[![PHP Version](https://img.shields.io/packagist/php-v/bauhaus/assert-psr-response?style=flat-square)](composer.json)
+[![License](https://img.shields.io/github/license/bauhausphp/assert-psr-response?style=flat-square)](LICENSE)
 
 > **Important** this package won't worry about backward compatibily for `v0.*`
 > versions.
