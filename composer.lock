@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d49f90457bdcf2c25b03571993e2b88a",
+    "content-hash": "4591446d722509cf75677aef37a15a30",
     "packages": [
         {
             "name": "fefas/jsoncoder",
