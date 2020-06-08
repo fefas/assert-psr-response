@@ -25,7 +25,7 @@ PSR responses during testing, for example feature APIs testing using the
 Install it using [Composer](https://getcomposer.org/):
 
 ```shell
-$ composer require fefas/assert-psr-response
+$ composer require bauhaus/assert-psr-response
 ```
 
 ## Available Matchers
@@ -135,7 +135,7 @@ case. See the samples bellow:
 ## Contribution
 
 There is two ways to contribute with this project. The first one is by opening
-an issue [here](https://github.com/fefas/assert-psr-response/issues). The second
+an issue [here](https://github.com/bauhausphp/assert-psr-response/issues). The second
 one is by coding:
 
 1. Fork this project and clone it on your local dev environment
