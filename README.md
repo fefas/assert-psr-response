@@ -59,7 +59,7 @@ case. See the samples bellow:
    ```php
    <?php
 
-   use Fefas\AssertPsrResponse\AssertPsrResponse;
+   use Bauhaus\AssertPsrResponse\AssertPsrResponse;
 
    $psrResponse = // retrieve it from somewhere ...
    $psrResponse = $psrResponse->withStatus(200);
@@ -76,7 +76,7 @@ case. See the samples bellow:
    ```php
    <?php
 
-   use Fefas\AssertPsrResponse\AssertPsrResponse;
+   use Bauhaus\AssertPsrResponse\AssertPsrResponse;
 
    $psrResponse = // retrieve it from somewhere ...
    $psrResponse = $psrResponse->withStatus(500);
@@ -94,7 +94,7 @@ case. See the samples bellow:
    ```php
    <?php
 
-   use Fefas\AssertPsrResponse\AssertPsrResponse;
+   use Bauhaus\AssertPsrResponse\AssertPsrResponse;
 
    $psrResponse = // retrieve it from somewhere ...
    $psrResponse = $psrResponse
@@ -115,7 +115,7 @@ case. See the samples bellow:
    ```php
    <?php
 
-   use Fefas\AssertPsrResponse\AssertPsrResponse;
+   use Bauhaus\AssertPsrResponse\AssertPsrResponse;
 
    $psrResponse = // retrieve it from somewhere ...
    $psrResponse = $psrResponse

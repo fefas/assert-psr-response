@@ -1,6 +1,6 @@
 <?php
 
-namespace Fefas\AssertPsrResponse\Matchers;
+namespace Bauhaus\AssertPsrResponse\Matchers;
 
 interface Matcher
 {

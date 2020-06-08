@@ -17,13 +17,13 @@
 
     "autoload": {
         "psr-4": {
-            "Fefas\\AssertPsrResponse\\": "src/"
+            "Bauhaus\\AssertPsrResponse\\": "src/"
         }
     },
 
     "autoload-dev": {
         "psr-4": {
-            "Fefas\\AssertPsrResponse\\": "tests/"
+            "Bauhaus\\AssertPsrResponse\\": "tests/"
         }
     },
 

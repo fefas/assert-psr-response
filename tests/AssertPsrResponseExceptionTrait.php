@@ -1,6 +1,6 @@
 <?php
 
-namespace Fefas\AssertPsrResponse;
+namespace Bauhaus\AssertPsrResponse;
 
 trait AssertPsrResponseExceptionTrait
 {

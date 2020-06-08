@@ -1,6 +1,6 @@
 <?php
 
-namespace Fefas\AssertPsrResponse;
+namespace Bauhaus\AssertPsrResponse;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\StreamInterface as Stream;
