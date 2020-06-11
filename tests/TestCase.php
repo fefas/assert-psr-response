@@ -41,7 +41,7 @@ abstract class TestCase extends PhpUnitTestCase
     {
         $responseBody = $this->createMock(Stream::class);
         $responseBody
-            ->method('getContents')
+            ->method('__toString')
             ->willReturn($jsonBody);
 
         $response = $this->createMock(Response::class);
