@@ -42,7 +42,8 @@ class HeaderLineTest extends TestCase
 
         $mismatchMessage = $headerLine->mismatchMessage($responseToAssert);
 
-        $expected = 'Actual response header line \'Content-Type\' \'text/html\' is not equal to the expected \'application/json\'';
+        $expected = 'Actual response header line \'Content-Type\' ';
+        $expected .= '\'text/html\' is not equal to the expected \'application/json\'';
         $this->assertEquals($expected, $mismatchMessage);
     }
 }
