@@ -32,7 +32,7 @@ class AssertPsrResponse
             return true;
         }
 
-        throw new AssertPsrResponseException($mismatchMessages);
+        throw new PsrResponseAssertionException($mismatchMessages);
     }
 
     public function matchStatusCode(int $expected): void

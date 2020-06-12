@@ -42,9 +42,7 @@ class JsonBodyTest extends TestCase
 
         $mismatchMessage = $jsonBodyMatcher->mismatchMessage($responseToAssert);
 
-        $this->assertEquals(
-            'Actual response json body \'[1,2,3]\' is not equal to the expected \'[1,2]\'',
-            $mismatchMessage
-        );
+        $expected = 'Actual response json body \'[1,2,3]\' is not equal to the expected \'[1,2]\'';
+        $this->assertEquals($expected, $mismatchMessage);
     }
 }
