@@ -6,9 +6,6 @@
 [![PHP Version](https://img.shields.io/packagist/php-v/bauhaus/assert-psr-response?style=flat-square)](composer.json)
 [![License](https://img.shields.io/github/license/bauhausphp/assert-psr-response?style=flat-square)](LICENSE)
 
-> **Important** this package won't worry about backward compatibily for `v0.*`
-> versions.
-
 # Assert PSR Response
 
 This composer package aims to provide an easy way to assert
@@ -16,9 +13,8 @@ This composer package aims to provide an easy way to assert
 
 ## Motivation
 
-I created this package because my constant need to assert only certain values of
-PSR responses during testing, for example feature APIs testing using the
-[Behat](http://behat.org/en/latest/) framework.
+I created this package because my constant need of asserting only certain values
+of PSR responses during acceptance tests.
 
 ## Installation
 
@@ -28,109 +24,36 @@ Install it using [Composer](https://getcomposer.org/):
 $ composer require bauhaus/assert-psr-response
 ```
 
-## Available Matchers
-
-Here are the available matchers so far:
-
-* Status Code:
-  ```php
-  matchStatusCode(int $expected): void
-  ```
-
-* Header Line:
-  ```php
-  matchHeaderLine(string $headerName, string $expected): void
-  ```
-
-* JSON Body:
-  ```php
-  matchJsonBody(string $expected): void
-  ```
-
 ## Usage
 
-The class `AssertPsrResponse` allows the assertion of certain PSR-7 response
-values. That means you don't have to verify the hole PSR-7 response object,
-instead you can just assert the fields which are relevants for your current
-case. See the samples bellow:
+```php
+<?php
 
-1. Assert Status Code that matches the expected:
+use Bauhaus\PsrResponseAssertion\PsrResponseAssertion;
+use Bauhaus\PsrResponseAssertion\Matchers\HeaderLine;
+use Bauhaus\PsrResponseAssertion\Matchers\StatusCode;
 
-   ```php
-   <?php
+$assertion = PsrResponseAssertion::with(
+   StatusCode::equalTo(200),
+   HeaderLine::equalTo('Content-Type', 'application/json')
+);
 
-   use Bauhaus\AssertPsrResponse\AssertPsrResponse;
+$psrResponse = // retrieve it from somewhere ...
+$psrResponse = $psrResponse
+   ->withStatus(404)
+   ->withHeader('Content-Type', 'text/html');
 
-   $psrResponse = // retrieve it from somewhere ...
-   $psrResponse = $psrResponse->withStatus(200);
+$assertion->assert($psrResponse);
+// throw PsrResponseAssertionException with message:
+// Actual response status code '404' is not equal to the expected '200'
+// Actual response header line 'Content-Type' 'text/html' is not equal to the expected 'application/json'
+```
 
-   $assertPsrResponse = new AssertPsrResponse($psrResponse);
-   $assertPsrResponse->matchStatusCode(200);
+## Available Matchers
 
-   $assertPsrResponse->assert();
-   // return true and don't throw any exception
-   ```
-
-2. Assert Status Code that doesn't match the expected
-
-   ```php
-   <?php
-
-   use Bauhaus\AssertPsrResponse\AssertPsrResponse;
-
-   $psrResponse = // retrieve it from somewhere ...
-   $psrResponse = $psrResponse->withStatus(500);
-
-   $assertPsrResponse = new AssertPsrResponse($psrResponse);
-   $assertPsrResponse->matchStatusCode(200);
-
-   $assertPsrResponse->assert();
-   // throw RuntimeException with message:
-   // Failed matching response status code '500' with the expected '200'
-   ```
-
-3. Assert Status Code and Header Line that match partly the expected
-
-   ```php
-   <?php
-
-   use Bauhaus\AssertPsrResponse\AssertPsrResponse;
-
-   $psrResponse = // retrieve it from somewhere ...
-   $psrResponse = $psrResponse
-       ->withStatus(200)
-       ->withHeader('Content-Type', 'application/json');
-
-   $assertPsrResponse = new AssertPsrResponse($psrResponse);
-   $assertPsrResponse->matchStatusCode(200);
-   $assertPsrResponse->matchHeaderLine('Content-Type', 'text/html');
-
-   $assertPsrResponse->assert();
-   // throw RuntimeException with message:
-   // Failed matching response header line 'Content-Type' 'application/json' with the expected 'text/html'
-   ```
-
-4. Assert Status Code and Header Line that don't match the expected
-
-   ```php
-   <?php
-
-   use Bauhaus\AssertPsrResponse\AssertPsrResponse;
-
-   $psrResponse = // retrieve it from somewhere ...
-   $psrResponse = $psrResponse
-       ->withStatus(500)
-       ->withHeader('Content-Type', 'text/html');
-
-   $assertPsrResponse = new AssertPsrResponse($psrResponse);
-   $assertPsrResponse->matchStatusCode(200);
-   $assertPsrResponse->matchHeaderLine('Content-Type', 'application/json');
-
-   $assertPsrResponse->assert();
-   // throw RuntimeException with message:
-   // Failed matching response status code '500' with the expected '200'
-   // Failed matching response header line 'Content-Type' 'text/html' with the expected 'application/json'
-   ```
+- `StatusCode::equalTo(200)`
+- `HeaderLine::equalTo('Header-Name', 'Header-Value')`
+- `JsonBody::equalTo('{"field":"value"}')`
 
 ## Contribution
 
