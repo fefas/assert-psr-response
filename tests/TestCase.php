@@ -12,8 +12,13 @@ abstract class TestCase extends PhpUnitTestCase
     {
         $message = str_replace('/', '\/', $message);
 
-        $this->expectException(AssertPsrResponseException::class);
+        $this->expectException(PsrResponseAssertionException::class);
         $this->expectExceptionMessageMatches("/^$message$/");
+    }
+
+    protected function response(): Response
+    {
+        return $this->createMock(Response::class);
     }
 
     protected function responseWithStatus(int $statusCode): Response
@@ -41,7 +46,7 @@ abstract class TestCase extends PhpUnitTestCase
     {
         $responseBody = $this->createMock(Stream::class);
         $responseBody
-            ->method('getContents')
+            ->method('__toString')
             ->willReturn($jsonBody);
 
         $response = $this->createMock(Response::class);

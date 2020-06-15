@@ -4,7 +4,7 @@ namespace Bauhaus\AssertPsrResponse;
 
 use RuntimeException;
 
-class AssertPsrResponseException extends RuntimeException
+class PsrResponseAssertionException extends RuntimeException
 {
     public function __construct(array $mismatchMessages)
     {
