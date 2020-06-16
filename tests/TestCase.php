@@ -2,6 +2,7 @@
 
 namespace Bauhaus\AssertPsrResponse;
 
+use Bauhaus\AssertPsrResponse\Exceptions\PsrResponseAssertionException;
 use PHPUnit\Framework\TestCase as PhpUnitTestCase;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\StreamInterface as Stream;

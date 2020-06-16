@@ -2,6 +2,7 @@
 
 namespace Bauhaus\AssertPsrResponse\Matchers;
 
+use Bauhaus\AssertPsrResponse\Exceptions\MalformedJsonException;
 use Bauhaus\AssertPsrResponse\TestCase;
 
 class JsonBodyTest extends TestCase
@@ -44,5 +45,28 @@ class JsonBodyTest extends TestCase
 
         $expected = 'Actual response json body \'[1,2,3]\' is not equal to the expected \'[1,2]\'';
         $this->assertEquals($expected, $mismatchMessage);
+    }
+
+    /**
+     * @test
+     */
+    public function throwExceptionIfAMalformedJsonIsProvidedAsExpectedValue(): void
+    {
+        $this->expectException(MalformedJsonException::class);
+
+        JsonBody::equalTo('[1,2');
+    }
+
+    /**
+     * @test
+     */
+    public function throwExceptionIfResponseToAssertHasAMalformedJson(): void
+    {
+        $jsonBodyMatcher = JsonBody::equalTo('[1,2]');
+        $responseToAssert = $this->responseWithJsonBody('[1,2,3');
+
+        $this->expectException(MalformedJsonException::class);
+
+        $jsonBodyMatcher->match($responseToAssert);
     }
 }
