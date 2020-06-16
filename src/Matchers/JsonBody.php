@@ -2,27 +2,28 @@
 
 namespace Bauhaus\AssertPsrResponse\Matchers;
 
+use Bauhaus\AssertPsrResponse\Exceptions\MalformedJsonException;
 use Psr\Http\Message\ResponseInterface as PsrResponse;
 use Fefas\Jsoncoder\Json;
+use InvalidArgumentException;
 
-class JsonBody implements Matcher
+final class JsonBody implements Matcher
 {
     private const MISMATCH_MESSAGE =
         'Actual response json body \'%s\' is not equal to the expected \'%s\'';
 
-    private string $expected;
+    private Json $expected;
 
-    public function __construct(string $expected)
+    private function __construct(string $expected)
     {
-        $this->expected = $expected;
+        $this->expected = $this->handleJson($expected);
     }
 
     public function match(PsrResponse $psrResponse): bool
     {
-        $expected = Json::createFromString($this->expected);
-        $actual = Json::createFromString($this->extractBody($psrResponse));
+        $actual = $this->handleJson($this->extractBody($psrResponse));
 
-        return $expected->isEqualTo($actual);
+        return $this->expected->isEqualTo($actual);
     }
 
     public function mismatchMessage(PsrResponse $psrResponse): string
@@ -38,5 +39,14 @@ class JsonBody implements Matcher
     private function extractBody(PsrResponse $psrResponse): string
     {
         return (string) $psrResponse->getBody();
+    }
+
+    private function handleJson(string $jsonString): Json
+    {
+        try {
+            return Json::createFromString($jsonString);
+        } catch (InvalidArgumentException $ex) {
+            throw new MalformedJsonException($jsonString, $ex);
+        }
     }
 }

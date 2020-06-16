@@ -1,6 +1,6 @@
 <?php
 
-namespace Bauhaus\AssertPsrResponse;
+namespace Bauhaus\AssertPsrResponse\Exceptions;
 
 use RuntimeException;
 

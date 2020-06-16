@@ -2,6 +2,7 @@
 
 namespace Bauhaus\AssertPsrResponse;
 
+use Bauhaus\AssertPsrResponse\Exceptions\PsrResponseAssertionException;
 use Bauhaus\AssertPsrResponse\Matchers\Matcher;
 use Psr\Http\Message\ResponseInterface as PsrResponse;
 
