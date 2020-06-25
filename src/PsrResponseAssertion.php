@@ -21,16 +21,16 @@ final class PsrResponseAssertion
 
     public function assert(PsrResponse $response): bool
     {
-        if (!$this->hasMismatcher($response)) {
+        if ($this->hasNoMismatcher($response)) {
             return true;
         }
 
         throw new PsrResponseAssertionException($this->buildMismatchMessages($response));
     }
 
-    private function hasMismatcher(PsrResponse $response): bool
+    private function hasNoMismatcher(PsrResponse $response): bool
     {
-        return [] !== $this->findMismatchers($response);
+        return $this->findMismatchers($response) === [];
     }
 
     private function buildMismatchMessages(PsrResponse $response): array
