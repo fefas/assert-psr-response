@@ -19,25 +19,28 @@ final class PsrResponseAssertion
         return $self;
     }
 
-    public function assert(PsrResponse $psrResponse): bool
+    public function assert(PsrResponse $response): bool
     {
-        $notMatching = $this->notMatching($psrResponse);
-
-        if ([] === $notMatching) {
+        if ($this->hasNoMismatcher($response)) {
             return true;
         }
 
-        $mismatchMessages = array_map(function (Matcher $matcher) use ($psrResponse): string {
-            return $matcher->mismatchMessage($psrResponse);
-        }, $notMatching);
-
-        throw new PsrResponseAssertionException($mismatchMessages);
+        throw new PsrResponseAssertionException($this->buildMismatchMessages($response));
     }
 
-    private function notMatching(PsrResponse $psrResponse): array
+    private function hasNoMismatcher(PsrResponse $response): bool
     {
-        return array_filter($this->matchers, function (Matcher $matcher) use ($psrResponse): bool {
-            return !$matcher->match($psrResponse);
-        });
+        return $this->findMismatchers($response) === [];
+    }
+
+    private function buildMismatchMessages(PsrResponse $response): array
+    {
+        $mismatchers = $this->findMismatchers($response);
+        return array_map(fn(Matcher $m) => $m->mismatchMessage($response), $mismatchers);
+    }
+
+    private function findMismatchers(PsrResponse $response): array
+    {
+        return array_filter($this->matchers, fn(Matcher $m) => !$m->match($response));
     }
 }
